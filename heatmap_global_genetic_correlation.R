@@ -1,5 +1,10 @@
+# Install required packages if not already installed
+# install.packages("pheatmap")
+
+# Load the pheatmap package
 library(pheatmap)
 library(reshape2)
+library(grid)  
 
 # Create the dataframe for AD/PD heatmap
 data <- data.frame(
@@ -32,8 +37,14 @@ data <- data.frame(
 # Remove rows with missing Rg values
 data <- data[!is.na(data$Rg), ]
 
+# Add significance asterisks based on P_value
+data$Significance <- ifelse(data$P_value < 0.001, "***", 
+                            ifelse(data$P_value < 0.01, "**", 
+                                   ifelse(data$P_value < 0.05, "*", "")))
+
 # Reshape the data into a matrix for pheatmap
 heatmap_data <- reshape2::acast(data, Traits ~ Disease, value.var = "Rg")
+significance_data <- acast(data, Traits ~ Disease, value.var = "Significance")
 
 # Reorder the columns (AD/PD sex-combined first, then AD/PD males, then AD/PD females)
 ordered_cols <- c("AD_sexcombined", "PD_sexcombined", 
@@ -42,6 +53,7 @@ ordered_cols <- c("AD_sexcombined", "PD_sexcombined",
 
 # Ensure columns are in the correct order
 heatmap_data <- heatmap_data[, ordered_cols]
+significance_data <- significance_data[, ordered_cols]
 
 # Define a color palette with 0 as white, negative values as blue, and positive as red
 color_palette <- colorRampPalette(c("blue", "white", "red"))(100)
@@ -51,14 +63,13 @@ max_abs_value <- max(abs(heatmap_data), na.rm = TRUE)
 pheatmap(heatmap_data, 
          cluster_rows = FALSE, 
          cluster_cols = FALSE, 
-         display_numbers = TRUE, 
+         display_numbers = custom_display(heatmap_data, significance_data), 
          color = color_palette, 
          breaks = seq(-max_abs_value, max_abs_value, length.out = 101), 
          main = "Genetic Correlations (Rg) between Kidney Traits and Neurodegenerative Diseases",
          fontsize_number = 10)
 
-
-## Create the data frame for PD and No Proxy PD
+# Create the data frame for PD and No Proxy PD
 data <- data.frame(
   Disease = c("PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined",
               "PD_male", "PD_male", "PD_male", "PD_male", "PD_male", "PD_male",
@@ -85,8 +96,14 @@ data <- data.frame(
 # Remove rows with missing Rg values
 data <- data[!is.na(data$Rg), ]
 
+# Add significance asterisks based on P_value
+data$Significance <- ifelse(data$P_value < 0.001, "***", 
+                            ifelse(data$P_value < 0.01, "**", 
+                                   ifelse(data$P_value < 0.05, "*", "")))
+
 # Reshape the data into a matrix for pheatmap
 heatmap_data <- acast(data, Traits ~ Disease, value.var = "Rg")
+significance_data <- acast(data, Traits ~ Disease, value.var = "Significance")
 
 # Reorder the columns (PD first, No Proxie PD next)
 ordered_cols <- c("PD_sexcombined", "PD_male", "PD_female", 
@@ -94,6 +111,7 @@ ordered_cols <- c("PD_sexcombined", "PD_male", "PD_female",
 
 # Ensure columns are in the correct order
 heatmap_data <- heatmap_data[, ordered_cols]
+significance_data <- significance_data[, ordered_cols]
 
 # Define a color palette with 0 as white, negative values as blue, and positive as red
 color_palette <- colorRampPalette(c("blue", "white", "red"))(100)
@@ -103,7 +121,7 @@ max_abs_value <- max(abs(heatmap_data), na.rm = TRUE)
 pheatmap(heatmap_data, 
          cluster_rows = FALSE, 
          cluster_cols = FALSE, 
-         display_numbers = TRUE, 
+         display_numbers = custom_display(heatmap_data, significance_data), 
          color = color_palette, 
          breaks = seq(-max_abs_value, max_abs_value, length.out = 101), 
          main = "Genetic Correlations (Rg) between Kidney Traits and PD/No Proxy PD",
