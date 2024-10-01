@@ -1,10 +1,5 @@
-# Install required packages if not already installed
-# install.packages("pheatmap")
-
-# Load the pheatmap package
 library(pheatmap)
 library(reshape2)
-library(grid)  
 
 # Create the dataframe for AD/PD heatmap
 data <- data.frame(
@@ -62,7 +57,8 @@ pheatmap(heatmap_data,
          main = "Genetic Correlations (Rg) between Kidney Traits and Neurodegenerative Diseases",
          fontsize_number = 10)
 
-# Create the data frame for PD and No Proxy PD
+
+## Create the data frame for PD and No Proxy PD
 data <- data.frame(
   Disease = c("PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined", "PD_sexcombined",
               "PD_male", "PD_male", "PD_male", "PD_male", "PD_male", "PD_male",
