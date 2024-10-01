@@ -13,13 +13,10 @@ vcf_processed <- vcf_data %>%
          SE = as.numeric(SE),
          LP = as.numeric(LP),
          AF = as.numeric(AF),
-         Z = ES / SE,             # Calculate Z-score from effect size and standard error
-         P = 10^(-LP)) %>%        # Convert LP (log p-value) back to p-value
-  select('#CHROM', POS, ID, REF, ALT, ES, SE, Z, P, AF)
-
-# Calculate MAF from AF
-vcf_processed <- vcf_processed %>%
-  mutate(MAF = pmin(AF, 1 - AF))
+         Z = ES / SE,                    # Calculate Z-score from effect size and standard error
+         P = 10^(-LP),                   # Convert LP (log p-value) back to p-value
+         MAF = pmin(AF, 1 - AF)) %>%     # Calculate MAF from AF
+  select('#CHROM', POS, ID, REF, ALT, SE, Z, P, MAF)
 
 # Rename the columns to match standard GWAS summary stats format
 vcf_final <- vcf_processed %>%
