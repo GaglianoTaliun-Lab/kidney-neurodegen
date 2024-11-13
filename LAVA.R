@@ -1,4 +1,4 @@
-# Limit OpenMP threads to 1 (for any package using OpenMP)
+# Limit OpenMP threads to 1 
 Sys.setenv(OMP_NUM_THREADS = 1)
 
 # Limit the number of threads in data.table, if it’s being used
@@ -67,7 +67,7 @@ all_traits <- list(
   c("NP_PD_male", "GFR_males"),
   c("NP_PD_female", "GFR_females"))
 
-# Select which trait pair to process by specifying the index in `all_traits`
+# Select which trait pair to process
 selected_index <- 3  # Change this to process a different trait pair
 traits <- all_traits[[selected_index]]
 
@@ -90,7 +90,7 @@ sample_overlap_file <- file.path(project_dir, "sample_overlap", overlap_dir, pas
 args <- list(
   ref_prefix = file.path(project_dir, "g1000_eur/g1000_eur"),
   loc_file = file.path(project_dir, "blocks_s2500_m25_f1_w200.GRCh37_hg19.locfile"),
-  info_file = file.path(project_dir, "info_files/input_info.txt"),  # Single consolidated input_info file
+  info_file = file.path(project_dir, "info_files/input_info.txt"), 
   sample_overlap_file = sample_overlap_file,
   phenotypes = traits,
   output_filename = paste(traits, collapse = "_")
