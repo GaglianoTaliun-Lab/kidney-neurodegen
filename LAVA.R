@@ -56,8 +56,8 @@ all_traits <- list(
   c("PD_sexcomb", "GFR_sexcombined"),
   c("NP_PD_male", "microalbumine_males"),
   c("NP_PD_female", "microalbumine_females"),
-  c("NP_PD_male", "creatinine_males"),
-  c("NP_PD_female", "creatinine_female"),
+  c("NP_PD_male", "creatinine_male"),
+  c("NP_PD_female", "creatinine_females"),
   c("NP_PD_male", "potassium_males"),
   c("NP_PD_female", "potassium_females"),
   c("NP_PD_male", "sodium_male"),
@@ -75,10 +75,10 @@ traits <- all_traits[[selected_index]]
 get_overlap_directory <- function(trait) {
   if (str_detect(trait, "^AD")) {
     return("AD_output")
-  } else if (str_detect(trait, "^PD") | str_detect(trait, "^NP_PD")) {
-    return("PD_output")
-  } else {
+  } else if (str_detect(trait, "^PD")) {
     return("no_proxies_output")
+  } else {
+    return("no_proxies_output")  # Default case
   }
 }
 
