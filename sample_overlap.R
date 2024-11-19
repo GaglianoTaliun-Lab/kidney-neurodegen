@@ -4,28 +4,8 @@ library(stringr)
 library(data.table)
 library(readr)
 
-# Set arguments 
-
 # Replace this with your actual project directory
 project_dir <- "/home/sadafgy/projects/def-gsarah/sadafgy"
-
-# Define the phenotypes manually based on the files you provided
-phenotypes_prox <- c("AD_creatinine_sexcombined", "AD_male", "AD_female", "PD_sexcomb", "PD_male", "PD_female")
-
-kidney_traits <- c("creatinine", "microalbumin", "potassium", "sodium", "GFR", "hematuria")
-
-# No-proxies phenotypes (example, modify this based on your files)
-phenotypes_noprox <- c("NP_PD_creatinine_female", 
-                     "NP_PD_creatinine_male", "NP_PD_GFR_female", "NP_PD_GFR_male", 
-                     "NP_PD_hematuria_female", "NP_PD_hematuria_male", 
-                     "NP_PD_microalbumine_female", "NP_PD_microalbumine_male", 
-                     "NP_PD_potassium_female", "NP_PD_potassium_male", "NP_PD_sodium_female", 
-                     "NP_PD_sodium_male", "NP_PD_creatinine_sexcomb", "NP_PD_GFR_sexcomb", "NP_PD_hematuria_sexcomb",
-                     "NP_PD_microalbumine_sexcomb", "NP_PD_potassium_sexcomb", "NP_PD_sodium",
-                     "NP_AD_creatinine_sexcomb", "NP_AD_GFR_sexcomb", "NP_AD_hematuria_sexcomb",
-                     "NP_AD_microalbumine_sexcomb", "NP_AD_potassium_sexcomb", "NP_AD_sodium") 
-
-# Set directories
 gwas_dir <- file.path(project_dir, "ldscore_regression")
 out_dir <- file.path(project_dir, "LAVA", "ldsc_corr")
 
