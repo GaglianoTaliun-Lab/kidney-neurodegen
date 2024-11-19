@@ -20,7 +20,10 @@ phenotypes_noprox <- c("NP_PD_creatinine_female",
                      "NP_PD_hematuria_female", "NP_PD_hematuria_male", 
                      "NP_PD_microalbumine_female", "NP_PD_microalbumine_male", 
                      "NP_PD_potassium_female", "NP_PD_potassium_male", "NP_PD_sodium_female", 
-                     "NP_PD_sodium_male") 
+                     "NP_PD_sodium_male", "NP_PD_creatinine_sexcomb", "NP_PD_GFR_sexcomb", "NP_PD_hematuria_sexcomb",
+                     "NP_PD_microalbumine_sexcomb", "NP_PD_potassium_sexcomb", "NP_PD_sodium",
+                     "NP_AD_creatinine_sexcomb", "NP_AD_GFR_sexcomb", "NP_AD_hematuria_sexcomb",
+                     "NP_AD_microalbumine_sexcomb", "NP_AD_potassium_sexcomb", "NP_AD_sodium") 
 
 # Set directories
 gwas_dir <- file.path(project_dir, "ldscore_regression")
@@ -68,7 +71,7 @@ ldsc_results <- read.table("/home/sadafgy/projects/def-gsarah/sadafgy/LAVA/ldsc_
 
 # Extract unique phenotypes for proxies and non-proxies
 phenotypes_prox <- c("AD_female", "AD_male6", "AD_modified-v2", "PD_females", "PD_males", "PD_sexcomb")
-phenotypes_noprox <- c("NP_PD_female", "NP_PD_male")
+phenotypes_noprox <- c("NP_PD_female", "NP_PD_male", "NP_PD_sexcomb", "NP_AD_sexcomb")
 
 # Directories for saving outputs
 output_dir <- "/home/sadafgy/projects/def-gsarah/sadafgy/LAVA/sample_overlap"
@@ -158,7 +161,21 @@ phenotype_combinations <- list(
   list(combo = c("NP_PD_female", "sodium_female"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_male", "sodium_male"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_female", "hematuria_females"), dir = file.path(output_dir, "no_proxies_output")),
-  list(combo = c("NP_PD_male", "hematuria_males"), dir = file.path(output_dir, "no_proxies_output"))
+  list(combo = c("NP_PD_male", "hematuria_males"), dir = file.path(output_dir, "no_proxies_output")),
+  
+  # NP_PD_sexcomb and NP_AD_sexcomb
+  list(combo = c("NP_PD_sexcomb", "creatinine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "microalbumine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "creatinine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "microalbumine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output"))
 )
 
 # Loop through the phenotype combinations and generate matrices
