@@ -88,7 +88,7 @@ get_overlap_directory <- function(trait) {
   if (str_detect(trait, "^AD")) {
     return("AD_output")
   } else if (str_detect(trait, "^PD")) {
-    return("no_proxies_output")
+    return("PD_output")
   } else {
     return("no_proxies_output")  # Default case
   }
