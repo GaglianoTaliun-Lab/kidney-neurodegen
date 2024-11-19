@@ -65,7 +65,19 @@ all_traits <- list(
   c("NP_PD_male", "hematuria_males"),
   c("NP_PD_female", "hematuria_females"),
   c("NP_PD_male", "GFR_males"),
-  c("NP_PD_female", "GFR_females"))
+  c("NP_PD_female", "GFR_females"),
+  c("NP_PD_sexcomb", "microalbumine_sexcombined"),
+  c("NP_PD_sexcomb", "creatinine_sexcombined"),
+  c("NP_PD_sexcomb", "potassium_sexcombined"),
+  c("NP_PD_sexcomb", "sodium_sexcombined"),
+  c("NP_PD_sexcomb", "hematuria_sexcombined"),
+  c("NP_PD_sexcomb", "GFR_sexcombined"),
+  c("NP_AD_sexcomb", "microalbumine_sexcombined"),
+  c("NP_AD_sexcomb", "creatinine_sexcombined"),
+  c("NP_AD_sexcomb", "potassium_sexcombined"),
+  c("NP_AD_sexcomb", "sodium_sexcombined"),
+  c("NP_AD_sexcomb", "hematuria_sexcombined"),
+  c("NP_AD_sexcomb", "GFR_sexcombined"))
 
 # Select which trait pair to process
 selected_index <- 3  # Change this to process a different trait pair
