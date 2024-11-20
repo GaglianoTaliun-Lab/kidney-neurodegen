@@ -38,7 +38,7 @@ data <- data.frame(
 data <- data[!is.na(data$Rg), ]
 
 # Add significance asterisks based on P_value
-data$Significance <- ifelse(data$P_value < 0.001, "***", 
+data$Significance <- ifelse(data$P_value < 0.008, "***", 
                             ifelse(data$P_value < 0.01, "**", 
                                    ifelse(data$P_value < 0.05, "*", "")))
 
