@@ -145,13 +145,13 @@ phenotype_combinations <- list(
   
   # NP_PD_sexcomb and NP_AD_sexcomb
   list(combo = c("NP_PD_sexcomb", "creatinine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
-  list(combo = c("NP_PD_sexcomb", "microalbumine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcomb", "microalbumin_sexcomb"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_sexcomb", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_sexcomb", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_sexcomb", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_PD_sexcomb", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "creatinine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
-  list(combo = c("NP_AD_sexcomb", "microalbumine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_AD_sexcomb", "microalbumin_sexcomb"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
