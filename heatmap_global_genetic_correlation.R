@@ -145,7 +145,7 @@ pheatmap(heatmap_data,
          breaks = seq(-fixed_range, fixed_range, length.out = 101), 
          fontsize_number = 10,
          number_color = "black",  # Set number color to black
-         labels_col = c("Proxy", "No Proxy", "Proxy", "No Proxy", "Proxy", "No Proxy") # Add the custom labels for columns
+         labels_col = c("Proxy", "No Proxy", "Proxy", "No Proxy", "Proxy", "No Proxy"), # Add the custom labels for columns
          angle_col = 0,
          main = " "
 )
