@@ -20,10 +20,10 @@ data <- data.frame(
              "Hematuria", "Microalbumin", "Creatinine", "Potassium", "Sodium", "eGFR",
              "Hematuria", "Microalbumin", "Creatinine", "Potassium", "Sodium", "eGFR",
              "Hematuria", "Microalbumin", "Creatinine", "Potassium", "Sodium", "eGFR"),
-  Rg = c(0.1702, -0.0401, 0.0651, 0.1156, 0.0245, 0.0222,
+  Rg = c(0.1702, 0.0401, -0.0651, -0.1156, -0.0245, 0.0222,
          -0.1443, -0.2499, -0.0995, -0.216, 0.0408, 0.0158,
          0.0624, -0.2769, 0.0034, -0.0705, -0.1937, 0.0059,
-         -0.1218, 0.0873, 0.1124, 0.0915, 0.1238, 0.0236,
+         -0.1218, -0.0873, -0.1124, -0.0915, -0.1238, 0.0236,
          -0.1959, -0.1173, -0.0601, 0.0725, -0.0878, 0.012,
          -0.3245, -0.1497, -0.2061, -0.1495, -0.1869, 0.0668),
   P_value = c(0.1444, 0.7217, 0.2199, 0.0763, 0.6343, 0.6867,
@@ -63,7 +63,7 @@ custom_display <- function(values, significance) {
 }
 
 # Set a fixed range for the legend
-fixed_range <- 0.5
+fixed_range <- 0.5            # fixed-range = 0.25 for supplemetary heatmap
 
 # Create the heatmap
 pheatmap(heatmap_data, 
@@ -74,8 +74,9 @@ pheatmap(heatmap_data,
          breaks = seq(-fixed_range, fixed_range, length.out = 101), 
          number_color = "black",
          gaps_col = c(3),
-         labels_col = c("Sex-combined", "Male", "Female", "Sex-combined", "Male", "Female"),  #Change the labels for different data used
+         labels_col = c("Sex-\ncombined", "Male", "Female", "Sex-\ncombined", "Male", "Female"),  #Change the labels for different data used
          main = " ",
+         angle_col = 0,
          fontsize_number = 10)
 
 ### Heatmap for PD with and No proxy
@@ -89,8 +90,8 @@ data <- data.frame(
               "PD_female", "PD_female", "PD_female", "PD_female", "PD_female", "PD_female",
               "NP_PD_female", "NP_PD_female", "NP_PD_female", "NP_PD_female", "NP_PD_female", "NP_PD_female"),
   Traits = c(rep(c("Creatinine", "eGFR", "Hematuria", "Microalbumin", "Potassium", "Sodium"), 6)),
-  Rg = c(0.1124, 0.0236, -0.1218, 0.0873, 0.0915, 0.1238,  # PD_sexcombined
-         0.0871, 0.0262, -0.1160, 0.1027, 0.1062, 0.0726,  # No_proxy_PD_sexcombined
+  Rg = c(-0.1124, 0.0236, -0.1218, -0.0873, -0.0915, -0.1238,  # PD_sexcombined
+         -0.0871, 0.0262, -0.1160, -0.1027, -0.1062, -0.0726,  # No_proxy_PD_sexcombined
          -0.0601, 0.012, -0.1959, -0.1173, 0.0725, -0.0878,  # PD_male
          -0.0466, -0.0003, -0.1681, -0.0573, 0.0557, -0.1197,  # No_proxy_PD_male
          -0.2061, 0.0668, -0.3245, -0.1497, -0.1495, -0.1869,  # PD_female
