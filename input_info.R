@@ -4,7 +4,7 @@ library(here)
 
 # Set the project and summary statistics directories
 project_dir <- "~/projects/def-gsarah/sadafgy/LAVA/info_files"
-sumstats_dir <- "/scratch/sadafgy/processed_sumstats"
+sumstats_dir <- "~/projects/def-gsarah/sadafgy/processed_sumstats"
 
 # Read the combined case/control information
 N_samples <- read.table(
