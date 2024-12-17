@@ -24,7 +24,7 @@ sumstats_filtered <- sumstats %>%
 
 # Separate the 'variant' column into 'CHR', 'BP', 'a1', and 'a2'
 sumstats_filtered <- sumstats_filtered %>%
-  tidyr::separate(variant, into = c("CHR", "BP", "a1", "a2"), sep = ":") %>%
+  tidyr::separate(variant, into = c("CHR", "BP", "A2", "A1"), sep = ":") %>%
   dplyr::mutate(CHR = as.integer(CHR), BP = as.integer(BP))
 
 # Filter out rows where CHR or BP is missing or invalid
