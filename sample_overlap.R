@@ -50,8 +50,8 @@ library(data.table)
 ldsc_results <- read.table("/home/sadafgy/projects/def-gsarah/sadafgy/LAVA/ldsc_corr/ldsc_correlations_for_sample_overlap.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 
 # Extract unique phenotypes for proxies and non-proxies
-phenotypes_prox <- c("AD_female", "AD_male6", "AD_sexcombined", "PD_females", "PD_males", "PD_sexcomb")
-phenotypes_noprox <- c("NP_PD_female", "NP_PD_male", "NP_PD_sexcomb", "NP_AD_sexcomb")
+phenotypes_prox <- c("AD_female", "AD_male6", "AD_sexcombined", "PD_females", "PD_males", "PD_sexcomb", "PD_sexcombined")  # in this case, PD_sexcombined is PD_sexcombined meta-analyzed
+phenotypes_noprox <- c("NP_PD_female", "NP_PD_male", "NP_PD_sexcomb", "NP_PD_sexcombined_meta", "NP_AD_sexcomb")
 
 # Directories for saving outputs
 output_dir <- "/home/sadafgy/projects/def-gsarah/sadafgy/LAVA/sample_overlap_files"
@@ -155,7 +155,23 @@ phenotype_combinations <- list(
   list(combo = c("NP_AD_sexcomb", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
   list(combo = c("NP_AD_sexcomb", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
-  list(combo = c("NP_AD_sexcomb", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output"))
+  list(combo = c("NP_AD_sexcomb", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+
+  # PD sex-combined meta-analyzed
+  list(combo = c("PD_sexcombined", "creatinine_sexcombined"), dir = file.path(output_dir, "PD_output")),
+  list(combo = c("PD_sexcombined", "microalbumine_sexcombined"), dir = file.path(output_dir, "PD_output")),
+  list(combo = c("PD_sexcombined", "GFR_sexcombined"), dir = file.path(output_dir, "PD_output")),
+  list(combo = c("PD_sexcombined", "potassium_sexcombined"), dir = file.path(output_dir, "PD_output")),
+  list(combo = c("PD_sexcombined", "sodium_sexcombined"), dir = file.path(output_dir, "PD_output")),
+  list(combo = c("PD_sexcombined", "hematuria_sexcombined"), dir = file.path(output_dir, "PD_output")),
+
+  # NP_PD (no proxies) sex-combined meta-analyzed
+  list(combo = c("NP_PD_sexcombined_meta", "creatinine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcombined_meta", "microalbumine_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcombined_meta", "potassium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcombined_meta", "sodium_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcombined_meta", "GFR_sexcombined"), dir = file.path(output_dir, "no_proxies_output")),
+  list(combo = c("NP_PD_sexcombined_meta", "hematuria_sexcombined"), dir = file.path(output_dir, "no_proxies_output"))
 )
 
 # Loop through the phenotype combinations and generate matrices
