@@ -10,7 +10,7 @@ Sadaf Gawhary, Le Chang, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah
    
 2. "Global_Genetic_Correlation_LDSC.sh" goes through all the different combinations using the new formatted GWAS summary statistics (/processed_sumstats directory) and perform munge_sumstats.py and ldsc.py and saves the results (/ldsc_results/ldscore_regression directory)
    
-3. All the combination of phenotype's heritability is also found and saved (/ldsc_results/heritability) using "run_heritability.sh".
+3. All combinations of phenotype heritabilities is also found and saved (/ldsc_results/heritability) using "run_heritability.sh".
 
 
 LDSC result analysis
@@ -31,7 +31,7 @@ Prepare files for LAVA.
 
 Run LAVA 
 
-7. The script "LAVA.sh" goes through all "LAVA.R" for each combination of phenotypes to give univariate results with a Bonferroni thrsehold and Bivariate results.
+7. The script "LAVA.sh" goes through all "LAVA.R" for each phenotype combination to give univariate results with a Bonferroni threshold and Bivariate results.
 
 LAVA result analysis
 
@@ -43,12 +43,12 @@ LAVA result analysis
 9. The bivariate results obtained with LAVA are also used by the script "phenogram_plot_input.R" for each combinations (AD and PD with and without proxies) to :
     
    -> Step 1 : Find the loci in the bivariate results that respect these thrsehold and save them in the appropriate directory. 
-      - p<0.05 trehsold (save in /LAVA/phenoGram_plot/passing_bivariate_0.05 directory) 
-      - Bonferroni thrsehold (save in /LAVA/phenoGram_plot/bivariate_bonferroni_thrsehold directory)
+      - p<0.05 threshold (save in /LAVA/phenoGram_plot/passing_bivariate_0.05 directory) 
+      - Bonferroni threshold (save in /LAVA/phenoGram_plot/bivariate_bonferroni_thrsehold directory)
         
-   -> Step 2 : Combine the loci into 1 file for each combinations of PD (sex-combined, sex-combined meta-analyzed, male and female) and AD (sex-combined) with and without proxies. 
+   -> Step 2 : Combine the loci into 1 file for each combination of PD (sex-combined, sex-combined meta-analyzed, male and female) and AD (sex-combined) with and without proxies. 
       - use bivariate results to combined loci for PD and AD passing the univariate test saved (/LAVA/phenoGram_plot/passing univariate_test)
       - use loci passing bivariate test using p<0.05 (from step 1; /passing_bivariate_0.05 directory) to combine loci for PD and AD saved (/LAVA/phenoGram_plot/phenogram_data_005_threshold) 
       - use loci passing bivariate test using p<Bonferroni (from step 1; /bivariate_bonferroni_thrsehold directory) to combine loci for PD and AD saved (/LAVA/phenoGram_plot/bivariate_bonferroni_thrsehold)
       
-11. The script "FUMA.R" combines the non-proxies PD/AD of all 6 kideny traits for all sexes and changes the SNPs to a gene set to be used in FUMA.
+11. The script "FUMA.R" combines the non-proxies PD/AD of all 6 kidney traits for all sexes and changes the SNPs to a gene set to be used in FUMA.
