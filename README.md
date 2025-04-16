@@ -1,5 +1,8 @@
 # kidney-neurodegen
 
+This repository hosts the code for the work described in:
+Sadaf Gawhary, Le Chang, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A Gagliano Taliun. Assessment of global and local genetic correlations between kidney-related traits and late-onset neurodegenerative diseases.
+
 ## Global genetic correlation analysis (LDSC)
 
 1. GWAS summary statistics files found in the "/sumstats_data" directory are formatted in a format acceptable by LDSC (ie: have columns "CHR" and "BP to be able to annotate rsids) using scripts "formatting_GWASsumstats.R" and "VCF_to_sumstats_format.R" and saves them in the "/processed_sumstats" directory.
