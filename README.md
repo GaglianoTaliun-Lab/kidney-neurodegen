@@ -1,7 +1,8 @@
 # kidney-neurodegen
 
 This repository hosts the code for the work described in:
-Sadaf Gawhary, Le Chang, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A Gagliano Taliun. Assessment of global and local genetic correlations between kidney-related traits and late-onset neurodegenerative diseases.
+
+Sadaf Gawhary, Le Chang, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A Gagliano Taliun (2025) Assessment of global and local genetic correlations between kidney-related traits and late-onset neurodegenerative diseases.
 
 ## Global genetic correlation analysis (LDSC)
 
