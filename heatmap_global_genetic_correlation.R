@@ -6,6 +6,88 @@ library(pheatmap)
 library(reshape2)
 library(grid)  
 
+### Revised manuscript- Supp Fig 1. Heatmap for PD with and No proxy
+
+# Create the data frame for PD and No Proxy PD
+data <- data.frame(
+  Disease = c("PD_sexcombined", "PD_sexcombined", "PD_sexcombined",
+              "NP_PD_sexcombined", "NP_PD_sexcombined", "NP_PD_sexcombined",
+              "PD_sexcombined_meta", "PD_sexcombined_meta", "PD_sexcombined_meta",
+              "NP_PD_sexcombined_meta", "NP_PD_sexcombined_meta", "NP_PD_sexcombined_meta",
+              "PD_male", "PD_male", "PD_male",
+              "NP_PD_male", "NP_PD_male", "NP_PD_male",
+              "PD_female", "PD_female", "PD_female",
+              "NP_PD_female", "NP_PD_female", "NP_PD_female"),
+  Traits = c(rep(c("uACR", "eGFR", "Hematuria"), 8)),
+  Rg = c(-0.0259, 0.0236, -0.1218,  # PD_sexcombined
+         -0.0371, 0.0262, -0.1160,  # No_proxy_PD_sexcombined
+         -0.0678, 0.0627, -0.1543,  # PD_sexcombined_meta_analyzed
+         -0.0603, 0.0742, -0.1728,   # NP_PD_sexcombined_meta_analyzed
+         -0.1332, 0.012, -0.1959,  # PD_male
+         -0.1153, -0.0003, -0.1681,  # No_proxy_PD_male
+         -0.0015, 0.0668, -0.3245,  # PD_female
+         -0.0308, 0.0955, -0.3343),  # No_proxy_PD_female
+  P_value = c(0.6153, 0.4872, 0.0991,  # PD_sexcombined
+              0.4808, 0.419, 0.1501,  # No_proxy_PD_sexcombined
+              0.1769, 0.0735, 0.0219, # PD_sexcombined_meta_analyzed 
+              0.2592, 0.0464, 0.011,   # NP_PD_sexcombined_meta_analyzed 
+              0.0427, 0.8002, 0.1071,  # PD_male
+              0.1044, 0.995, 0.1742,  # No_proxy_PD_male
+              0.986, 0.213, 0.0056,  # PD_female
+              0.7119, 0.1009, 0.0092)  # No_proxy_PD_female
+)
+
+# Remove rows with missing Rg values
+data <- data[!is.na(data$Rg), ]
+
+# Add significance asterisks based on P_value
+data$Significance <- ifelse(data$P_value < 0.017, "**", 
+                            ifelse(data$P_value < 0.05, "*", ""))
+                                   #ifelse(data$P_value < 0.05, "*", "")))
+
+# Reshape the data into a matrix for pheatmap
+heatmap_data <- acast(data, Traits ~ Disease, value.var = "Rg")
+significance_data <- acast(data, Traits ~ Disease, value.var = "Significance")
+
+# Reorder the diseases and traits in the desired order
+ordered_traits <- c("eGFR", "Hematuria", "uACR")
+ordered_diseases <- c("PD_sexcombined", "NP_PD_sexcombined", "PD_sexcombined_meta", "NP_PD_sexcombined_meta", "PD_male", "NP_PD_male", "PD_female", "NP_PD_female")
+
+# Ensure columns are in the correct order
+heatmap_data <- heatmap_data[ordered_traits, ordered_diseases]
+significance_data <- significance_data[ordered_traits, ordered_diseases]
+
+# Define a color palette with 0 as white, negative values as blue, and positive as red
+color_palette <- colorRampPalette(c("blue", "white", "red"))(100)
+
+fixed_range <- 0.50
+
+custom_display <- function(values, significance) {
+  # Combine the values and significance annotations
+  formatted_data <- matrix(sprintf("%.3f%s", values, significance), 
+                           nrow = nrow(values), 
+                           dimnames = dimnames(values))
+  return(formatted_data)
+}
+
+# Create heatmap
+pheatmap(heatmap_data, 
+         cluster_rows = FALSE, 
+         cluster_cols = FALSE, 
+         display_numbers = custom_display(heatmap_data, significance_data), 
+         color = color_palette, 
+         breaks = seq(-fixed_range, fixed_range, length.out = 101), 
+         fontsize_number = 10,
+         number_color = "black",  # Set number color to black
+         labels_col = c("Proxy", "No Proxy", "Proxy", "No Proxy", "Proxy", "No Proxy", "Proxy", "No Proxy"), # Add the custom labels for columns
+         angle_col = 0,
+         gaps_col = c(2,4,6),
+         main = " "
+)
+
+
+########
+#######OLD FIGURES - originally submitted manuscript:
 # Figure 2 : heatmap AD/PD and PD meta-analyzed with and no proxy 
 # Create data frame
 data <- data.frame(
