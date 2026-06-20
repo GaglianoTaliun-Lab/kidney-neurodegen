@@ -1,54 +1,71 @@
-# kidney-neurodegen
+# Genome-wide cross-trait analysis of Parkinson's disease and kidney-related traits
 
-This repository hosts the code for the work described in:
+Analysis code and pipeline for the manuscript:
 
-Sadaf Gawhary, Le Chang, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A Gagliano Taliun (2025) Assessment of global and local genetic correlations between kidney-related traits and late-onset neurodegenerative diseases.
+> **Genome-wide cross-trait analysis characterizes shared genetic architecture between Parkinson's disease and kidney-related traits**
+> Le Chang\*, Sadaf Gawhary\*, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A. Gagliano Taliun
+> \*Equal contribution. Corresponding author: Sarah A. Gagliano Taliun (sarah.gagliano-taliun@umontreal.ca)
+>
 
-## Global genetic correlation analysis (LDSC)
+This repository contains the custom code used to characterize shared genetic
+architecture between Parkinson's disease (PD) and five kidney-related traits —
+estimated glomerular filtration rate (eGFR), urinary albumin-to-creatinine ratio
+(uACR), hematuria, urinary potassium-to-creatinine ratio (uK/Cr), and urinary
+sodium-to-creatinine ratio (uNa/Cr) — in individuals of European genetic ancestry.
+All coordinates are on genome build GRCh37 (hg19).
 
-1. GWAS summary statistics files found in the "/sumstats_data" directory are formatted in a format acceptable by LDSC (ie: have columns "CHR" and "BP to be able to annotate rsids) using scripts "formatting_GWASsumstats.R" and "VCF_to_sumstats_format.R" and saves them in the "/processed_sumstats" directory.
-   
-2. "Global_Genetic_Correlation_LDSC.sh" goes through all the different combinations using the new formatted GWAS summary statistics (/processed_sumstats directory) and perform munge_sumstats.py and ldsc.py and saves the results (/ldsc_results/ldscore_regression directory)
-   
-3. All combinations of phenotype heritabilities is also found and saved (/ldsc_results/heritability) using "run_heritability.sh".
+## Repository structure
 
+```
+.
+├── 01_ldsc/              # Cross-trait LD score regression 
+├── 02_lava/              # Local genetic correlation across LD blocks 
+├── 03_conjfdr/           # conjFDR / pleioFDR across 15 trait pairs
+├── 04_coloc_susie/       # Bayesian colocalization 
+├── 05_eqtl_annotation/   # eQTL lookup in GTEx v11 and NephQTL2
+├── 06_enrichment/        # FUMA GENE2FUNC + NetworkAnalyst 3.0 
+├── 07_figures/           # Figures
+├── data/                 # Data pointers only (see data/README.md) -- no raw data committed
+├── env/                  # Environment capture (renv.lock, sessionInfo, module list)
+├── CITATION.cff
+├── LICENSE
+└── README.md
+```
 
-LDSC result analysis
-4. The script "heatmap_global_genetic_correlations.R" makes 3 heatmaps showing all the different global genetic correlations obtained. 
+## Pipeline overview
 
-## Local genetic correlation analysis (LAVA)
-Prepare files for LAVA.
+1. **LDSC** (`01_ldsc/`) — genome-wide heritability and pairwise genetic correlation
+   between PD and each kidney trait.
+2. **LAVA** (`02_lava/`) — local genetic correlation across approximately independent
+   LD blocks. 
+3. **conjFDR / pleioFDR** (`03_conjfdr/`) — identification of pleiotropic loci jointly
+   associated with both traits at conjFDR < 0.05. 
+4. **coloc.susie** (`04_coloc_susie/`) — colocalization at conjFDR loci using
+   conservative priors (p1 = p2 = 1e-4, p12 = 5e-6), with coloc.abf as a fallback
+   where SuSiE did not converge. 
+5. **eQTL annotation** (`05_eqtl_annotation/`) — candidate gene assignment for
+   colocalized loci using GTEx v11 (brain tissues) and NephQTL2 (kidney).
+6. **Enrichment** (`06_enrichment/`) — pathway enrichment (FUMA GENE2FUNC) and PPI
+   network enrichment (NetworkAnalyst 3.0). 
+7. **Figures** (`07_figures/`) — figures for the manuscrpt.
 
-5. The script "input_info.R" uses a file "case_control_input_meta_analyzed.csv", previously made containing all the phenotype names, and number of cases and controls for all AD/PD, PD meta-analyzed (with and without proxies) in order to find the paths of each of those phenotypes and saves them in "input_info_PD_meta.txt".
-   
-6. The script "sample_overlap.R" links the results of cross-trait (LDSC) to LAVA.
-   
-   -> Step 1 : Uses all the results obtained from LDSC (in ldscore_regression directory) and combine them into 1 file and gives "ldsc_correlations_for_sample_overlap.txt" saved in       the directory "ldsc_corr".
-   
-   -> Step 2  : Creates the sample_overlap matrix for each correlation using "ldsc_correlations_for_sample_overlap.txt" (step 1 output) and saves them into the 
-      "sample_overlap_files" directory.
+## Software environment
 
+- **R 4.3.1**. Key packages: `data.table`, `ggplot2`, `ggrepel`, `patchwork`,
+  `cowplot`, `locuszoomr` (0.3.8), `coloc`, `susieR`, `openxlsx`,
+  `EnsDb.Hsapiens.v75`. Exact versions are pinned in `env/` (`renv.lock` /
+  `sessionInfo.txt`).
+- **PLINK 1.9** (1.9b_6.21) for LD operations.
+- **MATLAB** for the pleioFDR/conjFDR step (see `03_conjfdr/`).
+- Analyses were run on the Digital Research Alliance of Canada HPC under a SLURM
+  scheduler. Module loads are recorded in `env/modules.txt`.
 
-Run LAVA 
+## License
 
-7. The script "LAVA.sh" goes through all "LAVA.R" for each phenotype combination to give univariate results with a Bonferroni threshold and Bivariate results.
+Code is released under the MIT License (see `LICENSE`). The published article is
+licensed separately under CC BY 4.0.
 
-LAVA result analysis
+## Contact
 
-8. The bivariate results obtained with LAVA are used by the script "venn_diagram_data.R" to find the number of shared and unique loci between proxy and non-proxy AD (sex-combined) and PD (sex-stratified, sex-combined and sex-combined meta-analyzed) for 3 different categories :
-      Univariate test (passing the Bonferroni thrsehold)
-      Bivariate test (passing a p<0.05 thrsehold)
-      Bivariate test (passing a Bonferroni thrsehold)
-
-9. The bivariate results obtained with LAVA are also used by the script "phenogram_plot_input.R" for each combinations (AD and PD with and without proxies) to :
-    
-   -> Step 1 : Find the loci in the bivariate results that respect these thrsehold and save them in the appropriate directory. 
-      - p<0.05 threshold (save in /LAVA/phenoGram_plot/passing_bivariate_0.05 directory) 
-      - Bonferroni threshold (save in /LAVA/phenoGram_plot/bivariate_bonferroni_thrsehold directory)
-        
-   -> Step 2 : Combine the loci into 1 file for each combination of PD (sex-combined, sex-combined meta-analyzed, male and female) and AD (sex-combined) with and without proxies. 
-      - use bivariate results to combined loci for PD and AD passing the univariate test saved (/LAVA/phenoGram_plot/passing univariate_test)
-      - use loci passing bivariate test using p<0.05 (from step 1; /passing_bivariate_0.05 directory) to combine loci for PD and AD saved (/LAVA/phenoGram_plot/phenogram_data_005_threshold) 
-      - use loci passing bivariate test using p<Bonferroni (from step 1; /bivariate_bonferroni_thrsehold directory) to combine loci for PD and AD saved (/LAVA/phenoGram_plot/bivariate_bonferroni_thrsehold)
-      
-11. The script "FUMA.R" combines the non-proxies PD/AD of all 6 kidney traits for all sexes and changes the SNPs to a gene set to be used in FUMA.
+Questions about the code: open an issue or contact the corresponding author,
+Sarah A. Gagliano Taliun (sarah.gagliano-taliun@umontreal.ca).
