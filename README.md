@@ -16,7 +16,7 @@ All coordinates are on genome build GRCh37 (hg19).
 
 ## Study design
 
-![Analytical workflow for the cross-trait analysis of Parkinson's disease and five kidney-related traits.](figures/figure1_study_design.png)
+![Analytical workflow for the cross-trait analysis of Parkinson's disease and five kidney-related traits.](06_figures/figure1_study_design.png)
  
 **Figure 1. Analytical workflow.** GWAS summary statistics for PD and five
 kidney-related traits (eGFR, uACR, hematuria, uK/Cr, uNa/Cr), each in sex-combined,
@@ -75,12 +75,3 @@ aligned to GRCh37 (hg19).
 - Analyses were run on the Digital Research Alliance of Canada HPC under a SLURM
   scheduler. Module loads are recorded in `env/modules.txt`.
 
-## License
-
-Code is released under the MIT License (see `LICENSE`). The published article is
-licensed separately under CC BY 4.0.
-
-## Contact
-
-Questions about the code: open an issue or contact the corresponding author,
-Sarah A. Gagliano Taliun (sarah.gagliano-taliun@umontreal.ca).
