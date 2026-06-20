@@ -24,5 +24,4 @@ cd "${WORK_DIR}"
 nextflow run main_full.nf -profile rorqual -resume \
     --run_id analysis1 \
     --metadata ${WORK_DIR}/data/metadata.txt \
-    --lava_ref 'UKB' \
-    --coloc true 
+    --lava_ref 'UKB'  
