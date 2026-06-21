@@ -21,8 +21,7 @@ SCRIPT=scripts/04_define_loci_genes.py
 OUTDIR=results/fuma_loci
 mkdir -p "$OUTDIR"
 
-# Pairs with conjFDR signal. The CSV filename uses single underscores between the
-# two traits, while the directory uses double underscores, so we derive both.
+
 PAIRS=(
   PD_metaSS_noProxy__eGFR_meta
   PD_metaSS_noProxy__uACR_sexComb
@@ -39,7 +38,7 @@ SUMMARY="$OUTDIR/_run_summary.tsv"
 echo -e "pair\tsig_snps\tmhc_dropped\tmatched\tmerged_loci\tgenes_candidate\tgenes_ext500kb\tstatus" > "$SUMMARY"
 
 for PAIR in "${PAIRS[@]}"; do
-  FILEPREFIX="${PAIR/__/_}"   # double -> single underscore for the filename
+  FILEPREFIX="${PAIR/__/_}"   
   CSV="$CONJ_BASE/$PAIR/${FILEPREFIX}_zscore_conjfdr_0.05_all.csv"
 
   echo "===== $PAIR ====="

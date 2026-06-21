@@ -1,23 +1,5 @@
 #!/usr/bin/env python3
-"""
-05_prep_enrichment_inputs.py
 
-Prepare inputs for FUMA GENE2FUNC and NetworkAnalyst (both WEB tools — this script
-does not submit; it produces clean, consistent files to upload, plus a manifest so
-you know which pairs are worth submitting).
-
-Inputs : results/fuma_loci/<pair>_genes.txt   (candidate-span lists; see DECISIONS #0004)
-Outputs: results/enrichment/inputs/<pair>.txt           cleaned, deduped, sorted gene lists
-         results/enrichment/background_protein_coding.txt   universe for GENE2FUNC custom bg
-         results/enrichment/MANIFEST.tsv                 pair, n_genes, status (ready/too_small/empty)
-
-Usage:
-  python3 scripts/05_prep_enrichment_inputs.py \
-      --loci-dir results/fuma_loci \
-      --gene-file ~/.../protein_coding_genes_grch37.tsv \
-      --outdir results/enrichment \
-      --min-genes 10
-"""
 import argparse, glob, os, sys
 
 
@@ -77,7 +59,6 @@ def main():
             status = "too_small"
         else:
             status = "ready"
-        # write a cleaned copy for every non-empty pair (you decide what to submit)
         if n > 0:
             with open(os.path.join(inputs_dir, "%s.txt" % pair), "w") as out:
                 out.write("\n".join(genes) + "\n")
@@ -89,7 +70,6 @@ def main():
         for pair, n, status in rows:
             out.write("%s\t%d\t%s\n" % (pair, n, status))
 
-    # echo to screen
     print("Background (protein-coding universe): %d genes -> %s" % (len(bg), bg_path))
     print("\npair\tn_genes\tstatus")
     for pair, n, status in rows:

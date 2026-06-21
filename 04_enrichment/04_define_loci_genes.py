@@ -1,38 +1,4 @@
 #!/usr/bin/env python3
-"""
-fuma_loci_genes.py
-
-Reproduce (locally, no web UI) the FUMA-style LD-based genomic-risk-loci
-definition and positional gene mapping used in Yang et al. (Brain Comms 2026),
-applied to pleioFDR/conjFDR output.
-
-Protocol reproduced (Yang et al., Supplementary Methods):
-  - Independent significant SNPs : conjFDR < 0.05 and LD r2 < 0.6
-  - Candidate SNPs               : conjFDR < 0.05 and r2 >= 0.6 with an
-                                   independent significant SNP
-  - Genomic risk loci            : independent loci merged if within 250 kb
-  - Lead SNP                     : lowest-conjFDR SNP in the merged locus
-  - Locus boundaries             : min/max position of candidate SNPs
-  - Downstream extension         : +/- 500 kb around the lead SNP (reported only)
-  - Gene mapping                 : overlap with GENCODE v37 protein-coding genes
-
-IMPLEMENTATION NOTES
-  * Candidate SNPs all have conjFDR < 0.05 (Yang's definition), so PLINK clump
-    members come from the conjFDR significant file; no genome-wide file needed.
-  * The conjFDR file has chr:pos but no rsID. We match each SNP to EUR.bim BY
-    POSITION (hg19) to obtain the reference rsID used for clumping. SNPs absent
-    from EUR.bim are dropped from clumping (no LD), and the count is reported.
-  * Loci are defined by r2<0.6 clumping + 250 kb merge; a separate r2<0.1 lead
-    pass is not run because for GENE MAPPING only the boundaries matter, and the
-    250 kb merge is functionally equivalent for almost all loci.
-
-Outputs (per pair, in --outdir):
-  <pair>_GenomicRiskLoci.tsv   loci with candidate-SNP span, +/-500kb span, counts
-  <pair>_genes.txt             unique gene symbols from candidate-SNP boundaries
-  <pair>_genes_ext500kb.txt    unique gene symbols from +/-500 kb boundaries
-
-Run on ONE pair first and sanity-check before looping (see SLURM wrapper).
-"""
 
 import argparse
 import os
