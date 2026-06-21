@@ -1,6 +1,6 @@
 # Genome-wide cross-trait analysis of Parkinson's disease and kidney-related traits
 
-Analysis code and pipeline for the manuscript:
+Analysis code for the manuscript:
 
 > **Genome-wide cross-trait analysis characterizes shared genetic architecture between Parkinson's disease and kidney-related traits**
 > Le Chang\*, Sadaf Gawhary\*, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A. Gagliano Taliun
