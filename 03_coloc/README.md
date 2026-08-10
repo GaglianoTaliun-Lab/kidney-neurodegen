@@ -1,16 +1,12 @@
-# Stage 03 — Reference-free Bayesian colocalization (coloc.abf)
+# Stage 03 — Bayesian colocalization (coloc.abf)
 
 This stage tests whether PD and a kidney-related trait share a single causal variant at each
-non-MHC conjFDR-identified locus, using **reference-free** Bayesian colocalization
+non-MHC conjFDR-identified locus, using Bayesian colocalization
 (`coloc.abf`). `coloc.abf` derives colocalization posteriors directly from each trait's
-marginal association statistics under a single-causal-variant assumption, and therefore
-requires **no LD reference panel**. Prior probabilities are set conservatively
-(p1 = p2 = 1×10⁻⁴, p12 = 5×10⁻⁶, half the coloc default); the sensitivity of the calls to
+marginal association statistics under a single-causal-variant assumption. 
+Prior probabilities are set conservatively
+(p1 = p2 = 1×10⁻⁴, p12 = 5×10⁻⁶); the sensitivity of the calls to
 this choice is assessed across a grid of priors.
-
-> **Note.** The earlier version of this analysis used `coloc.susie` with an external
-> (1000 Genomes) LD reference. It was replaced with reference-free `coloc.abf` in the final
-> analysis, so no LD-matrix extraction step is required.
 
 ## Software used
 
