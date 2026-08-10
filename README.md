@@ -24,7 +24,6 @@ female-only, and male-only strata, yield 15 trait pairs. Pairs are analyzed with
 cross-trait LDSC (global genetic correlation), conjFDR/pleioFDR (pleiotropic loci),
 and LAVA (local genetic correlation). Genes mapped to conjFDR loci are assessed for
 pathway enrichment (FUMA GENE2FUNC) and PPI network enrichment (NetworkAnalyst 3.0),
-and loci are evaluated by Bayesian colocalization (coloc.susie, with coloc.abf
-fallback). All summary statistics are from individuals of European genetic ancestry,
-aligned to GRCh37 (hg19).
+and loci are evaluated by Bayesian colocalization (coloc.abf). 
+All summary statistics are from individuals of European genetic ancestry, aligned to GRCh37 (hg19).
 
