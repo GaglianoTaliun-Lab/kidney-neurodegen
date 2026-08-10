@@ -2,7 +2,7 @@
 
 Analysis code for the manuscript:
 
-> **Genome-wide cross-trait analysis characterizes shared genetic architecture between Parkinson's disease and kidney-related traits**
+> **Genome-wide cross-trait analysis to compare genetic architecture between Parkinson's disease and kidney-related traits**
 > Le Chang\*, Sadaf Gawhary\*, Lyza Maameri, Wiame Belbellaj, Frida Lona-Durazo, Sarah A. Gagliano Taliun
 > \*Equal contribution. Corresponding author: Sarah A. Gagliano Taliun (sarah.gagliano-taliun@umontreal.ca)
 >
