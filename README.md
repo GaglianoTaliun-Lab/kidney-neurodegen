@@ -27,3 +27,20 @@ pathway enrichment (FUMA GENE2FUNC) and PPI network enrichment (NetworkAnalyst 3
 and loci are evaluated by Bayesian colocalization (coloc.abf). 
 All summary statistics are from individuals of European genetic ancestry, aligned to GRCh37 (hg19).
 
+## Software and versions
+
+Versions match those reported in the Methods and Supplementary Methods:
+
+- **R 4.3.1** — `coloc` v5.2.3 (colocalization); tidyverse / `ggplot2` for figures
+- **Python 3.11**
+- **PLINK 1.9** (1.9b_6.21) — per-locus LD for regional plots and for the SLALOM in-sample LD reference
+- **LDSC** (v1.0.1) and **LAVA** (v0.1.5) — run through `nf-genetic-correlations`
+- **pleioFDR** (MATLAB)
+- **SLALOM / DENTIST-S** (v2.0.0)
+- **FUMA 2.0.0** and **NetworkAnalyst 3.0** (web platforms)
+
+## Running the analyses
+
+Stages are intended to be run in numerical order (`01_` → `06_`). 
+Analyses were run on a SLURM HPC cluster (Digital Research Alliance of Canada).
+
